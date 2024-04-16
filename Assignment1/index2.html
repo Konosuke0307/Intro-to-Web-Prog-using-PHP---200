@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Employee Portal - View Content</title>
+</head>
+<body>
+
+    <header>
+    
+        <nav>
+            <a href="information.html">information</a> |
+            <a href="SNS.html">SNS</a> |
+        </nav>
+        <div class="logo">
+            <img src="img.jpg" alt="Company Logo">
+        </div>
+    </header>
+
+<main>
+    <div class="container">
+        <h2>Employee Information</h2>
+        <?php
+        // Display content from the database
+        $servername = "your_database_server";
+        $username = "your_username";
+        $password = "your_password";
+        $dbname = "your_database_name";
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Retrieve and display data
+        $sql = "SELECT * FROM employee_info";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<p>Employee Name: " . $row["employee_name"]. " - Hours Worked: " . $row["hours_worked"]. "</p>";
+                // Add additional fields as needed
+            }
+        } else {
+            echo "No records found";
+        }
+
+        $conn->close();
+        ?>
+    </div>
+</main>
+
+<footer>
+    KG Group
+    <a href="information.html">privacy policy</a> 
+    Copyright © 2020 KG Group Co.,Ltd. All rights reserved.
+</footer>
+
+</body>
+</html>
